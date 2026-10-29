@@ -97,12 +97,12 @@
     th.dataset.kind = isVideo ? 'video' : 'photo'; th.dataset.bx = bx; th.dataset.by = by;
     th.setAttribute('role', 'button'); th.tabIndex = 0; th.title = isVideo ? '영상 재생' : '사진 보기';
     th.style.backgroundSize = '170%';
-    if (isVideo) { th.dataset.dur = dur; th.style.backgroundSize = 'cover'; th.style.backgroundPosition = '50% 40%'; }
+    if (isVideo) { th.dataset.dur = dur; th.style.backgroundImage = 'url(rec_kids_poster.jpg)'; th.style.backgroundSize = 'cover'; th.style.backgroundPosition = '50% 40%'; }
     // 화면 가운데에서 폰 갤러리로 날아가는 효과
     const sec = $('#exp-shoot').getBoundingClientRect();
     const fly = document.createElement('div');
     fly.className = 'fly';
-    fly.style.backgroundImage = 'url(pov_shoot.jpg)';
+    fly.style.backgroundImage = isVideo ? 'url(rec_kids_poster.jpg)' : 'url(pov_shoot.jpg)';
     fly.style.backgroundPosition = `${bx}% ${by}%`;
     fly.style.backgroundSize = isVideo ? 'cover' : '170%';
     const w = Math.min(420, innerWidth * .5), h = w * 0.6;
@@ -379,7 +379,9 @@
     time.textContent = `${fmt(elapsed)} / ${fmt(total)}`;
     if (playing) raf = requestAnimationFrame(tick);
   }
-  function play(){ if (elapsed >= total) { elapsed = 0; vid.currentTime = 0; } playing = true; last = performance.now(); vid.play().catch(()=>{}); pp.classList.add('on'); pp.setAttribute('aria-label', '일시정지'); raf = requestAnimationFrame(tick); }
+  const RATE = 1.8; // v14: 아이들 뛰는 실사 영상(Pexels 6299073)이 슬로모션이라 실제 속도에 가깝게
+  vid.defaultPlaybackRate = RATE;
+  function play(){ if (elapsed >= total) { elapsed = 0; vid.currentTime = 0; } vid.playbackRate = RATE; playing = true; last = performance.now(); vid.play().catch(()=>{}); pp.classList.add('on'); pp.setAttribute('aria-label', '일시정지'); raf = requestAnimationFrame(tick); }
   function stop(end){ playing = false; vid.pause(); pp.classList.remove('on'); pp.setAttribute('aria-label', '재생'); cancelAnimationFrame(raf); if (end) vw.classList.add('ended'); }
   vid.addEventListener('ended', () => { if (playing && elapsed < total) { vid.currentTime = 0; vid.play().catch(()=>{}); } }); // 10초 넘는 영상은 이어서 반복
   pp.addEventListener('click', e => { e.stopPropagation(); vw.classList.remove('ended'); playing ? stop() : play(); });
