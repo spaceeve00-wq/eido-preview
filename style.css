@@ -653,3 +653,7 @@ input[type=checkbox]{accent-color:#f5f5f3}
 .viewer[hidden]{display:none !important}
 .viewer:not(.show){pointer-events:none}
 .viewer.show{pointer-events:auto}
+
+/* v16: 촬영 장면을 영상과 같은 아이들 장면(shoot_kids.jpg)으로 — 웃는 머리띠 아이가 폰 목업 왼쪽에 보이게 */
+#exp-shoot .exp-bg{background-position:20% 40%}
+@media (max-width:820px){#exp-shoot .exp-bg{background-position:30% 18%}}
