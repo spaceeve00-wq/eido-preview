@@ -35,15 +35,39 @@
   /* ---------- 소리 도우미 ---------- */
   let actx;
   const audio = () => (actx ||= new (window.AudioContext || window.webkitAudioContext)());
+  // 셔터음: 실제 카메라처럼 "찰-칵" (짧은 금속 클릭 두 번 + 낮은 울림) — v14
+  function click(ctx, t, freq, dur, gain){
+    const n = Math.ceil(ctx.sampleRate * dur), buf = ctx.createBuffer(1, n, ctx.sampleRate), d = buf.getChannelData(0);
+    for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * Math.exp(-i / (n * 0.18));
+    const src = ctx.createBufferSource(); src.buffer = buf;
+    const bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = freq; bp.Q.value = 1.1;
+    const g = ctx.createGain(); g.gain.value = gain;
+    src.connect(bp).connect(g).connect(ctx.destination); src.start(t);
+  }
+  function thump(ctx, t, gain){
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.type = 'sine'; o.frequency.setValueAtTime(190, t); o.frequency.exponentialRampToValueAtTime(70, t + 0.05);
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(gain, t + 0.004); g.gain.exponentialRampToValueAtTime(0.0008, t + 0.07);
+    o.connect(g).connect(ctx.destination); o.start(t); o.stop(t + 0.08);
+  }
   function shutterSound(){
     try {
-      const ctx = audio(), t = ctx.currentTime;
-      const buf = ctx.createBuffer(1, ctx.sampleRate * 0.12, ctx.sampleRate), d = buf.getChannelData(0);
-      for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / d.length, 3);
-      const src = ctx.createBufferSource(); src.buffer = buf;
-      const f = ctx.createBiquadFilter(); f.type = 'highpass'; f.frequency.value = 1800;
-      const g = ctx.createGain(); g.gain.value = 0.5;
-      src.connect(f).connect(g).connect(ctx.destination); src.start(t);
+      const ctx = audio(); ctx.resume && ctx.resume(); const t = ctx.currentTime + 0.01;
+      click(ctx, t, 4200, 0.014, 0.55); thump(ctx, t, 0.22);          // 찰
+      click(ctx, t + 0.075, 2600, 0.02, 0.4); thump(ctx, t + 0.075, 0.14); // 칵
+    } catch(e){}
+  }
+  // 녹화 시작·멈춤 알림음: 부드러운 두 음 (시작 올라감, 멈춤 내려감)
+  function recBeep(start){
+    try {
+      const ctx = audio(); ctx.resume && ctx.resume(); const t = ctx.currentTime + 0.01;
+      const notes = start ? [880, 1318.5] : [1318.5, 880];
+      notes.forEach((f, i) => {
+        const o = ctx.createOscillator(), g = ctx.createGain(), s0 = t + i * 0.11;
+        o.type = 'sine'; o.frequency.value = f;
+        g.gain.setValueAtTime(0, s0); g.gain.linearRampToValueAtTime(0.13, s0 + 0.012); g.gain.exponentialRampToValueAtTime(0.0008, s0 + 0.16);
+        o.connect(g).connect(ctx.destination); o.start(s0); o.stop(s0 + 0.18);
+      });
     } catch(e){}
   }
   const voices = () => (window.speechSynthesis ? speechSynthesis.getVoices() : []);
@@ -135,14 +159,14 @@
     recBadge.classList.toggle('on', recording);
     led(recording);
     if (recording) {
-      shutterSound(); recStart = Date.now(); recTime.textContent = '00:00';
+      recBeep(true); recStart = Date.now(); recTime.textContent = '00:00';
       recTimer = setInterval(() => {
         const s = Math.floor((Date.now() - recStart) / 1000);
         recTime.textContent = fmt(s);
         if (s >= 720) btnVideo.click();
       }, 250);
     } else {
-      clearInterval(recTimer);
+      clearInterval(recTimer); recBeep(false);
       const s = Math.max(1, Math.floor((Date.now() - recStart) / 1000));
       addThumb(true, fmt(s));
     }
