@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>에이도 EIDO | Miss nothing.</title>
+<meta name="description" content="에이도 EIDO AI 스마트안경. 아무것도 놓치지 않게.">
+<meta name="theme-color" content="#0d0906">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<link rel="preload" as="image" href="pov_shoot.jpg">
+<link rel="stylesheet" href="style.css?v=20">
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <a class="nav-logo" href="#top" aria-label="에이도 EIDO"><img src="logo_white.svg" alt="EIDO"></a>
+  <nav class="nav-links">
+    <a href="#exp-shoot">촬영 체험</a>
+    <a href="#exp-talk">통역 체험</a>
+    <a href="#exp-voice">통화 체험</a>
+    <a href="#exp-lens">렌즈</a>
+  </nav>
+  <a class="nav-cta js-cta" href="#notify">알림 신청</a>
+</header>
+
+<main id="top">
+
+<!-- ================= 3D 인트로: 회전 → 착용 ================= -->
+<section class="intro" id="intro" aria-label="에이도 3D 소개">
+  <div class="intro-stage" id="introStage">
+    <div class="intro-glow" aria-hidden="true"></div>
+    <canvas id="introCanvas" aria-label="스크롤하면 돌아가는 에이도 3D 모델"></canvas>
+    <div class="wear-blur" id="wearBlur" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
+
+    <div class="ibeat hero-hud" data-a="0" data-b="0.06" aria-hidden="true">
+      <span class="hc tl"></span><span class="hc tr"></span><span class="hc bl"></span><span class="hc br"></span>
+      <div class="ht tl"><b class="rec"></b>REC <span id="heroTC">00:00:00:00</span></div>
+      <div class="ht tr">4K · EIS ON</div>
+      <div class="ht bl">MODEL EIDO-1</div>
+      <div class="ht br">49g · IP66</div>
+      <div class="af"><i></i><i></i><i></i><i></i><span>AF ●</span></div>
+      <div class="hz"><i></i></div>
+    </div>
+    <div class="ibeat ib-hero" data-a="0" data-b="0.06">
+      <p class="eyebrow">[ EIDO ] AI 스마트안경</p>
+      <h1 class="display en tech-title" data-text="Miss nothing."><span class="tt-text">Miss nothing.</span><i class="tt-scan"></i></h1>
+      <dl class="tech-spec">
+        <div><dt>CAMERA</dt><dd>20MP</dd></div>
+        <div><dt>VIDEO</dt><dd>4K</dd></div>
+        <div><dt>LANG</dt><dd>139</dd></div>
+        <div><dt>RATING</dt><dd>IP66</dd></div>
+        <div><dt>WEIGHT</dt><dd>49g</dd></div>
+      </dl>
+      <p class="sub tech-sub">&gt; 에이도를 한 겹씩 열어 봅니다<span class="cur">_</span></p>
+    </div>
+    <div class="ibeat ib-left" data-a="0.08" data-b="0.15">
+      <p class="eyebrow">01 프레임</p>
+      <h2 class="display ko">매트 블랙,<br>군더더기 없이.</h2>
+      <p class="sub">TR 소재와 금속 탄성 힌지. 정장에도, 러닝복에도.</p>
+    </div>
+    <div class="ibeat ib-right" data-a="0.17" data-b="0.24">
+      <p class="eyebrow">02 카메라</p>
+      <h2 class="display ko">눈높이에,<br>2,000만 화소.</h2>
+      <p class="sub">소니 센서. 4K 촬영, 2.5K로 최대 12분 한 파일.</p>
+    </div>
+    <div class="ibeat ib-left" data-a="0.26" data-b="0.33">
+      <p class="eyebrow">03 렌즈</p>
+      <h2 class="display ko">상황 따라<br>갈아 끼운다.</h2>
+      <p class="sub">블루라이트 차단 · 선글라스 · 변색, 3종.</p>
+    </div>
+    <div class="ibeat ib-right" data-a="0.35" data-b="0.42">
+      <p class="eyebrow">04 마이크</p>
+      <h2 class="display ko">골전도 마이크가<br>뼈 진동으로.</h2>
+      <p class="sub">코받침에서 내 목소리만. 시끄러운 곳에서도 또렷하게.</p>
+    </div>
+    <div class="ibeat ib-left" data-a="0.45" data-b="0.56">
+      <p class="eyebrow">05 다리</p>
+      <h2 class="display ko">귀를 막지 않는<br>스피커, 다리 안에.</h2>
+      <p class="sub">음악 약 10시간, 대기 7일 이상. USB-C 충전.</p>
+    </div>
+    <div class="ibeat ib-bottom" data-a="0.59" data-b="0.67">
+      <p class="eyebrow">06 완성</p>
+      <h2 class="display ko">49g.</h2>
+      <p class="sub">쓰고 있다는 걸 잊는 무게.</p>
+    </div>
+    <div class="ibeat ib-bottom" data-a="0.72" data-b="0.86">
+      <h2 class="display ko">이제, 써 보세요.</h2>
+    </div>
+    <div class="ibeat ib-center" data-a="0.93" data-b="1.2">
+      <h2 class="display ko">에이도의 눈으로 보는 세상.</h2>
+    </div>
+
+    <div class="intro-hud" aria-hidden="true"><span class="hud-bar"><i id="introBar"></i></span></div>
+    <div class="scroll-hint" aria-hidden="true"><span></span>Scroll</div>
+  </div>
+</section>
+
+<!-- ================= 체험 1: 촬영 ================= -->
+<section class="exp" id="exp-shoot">
+  <div class="exp-bg" style="background-image:url(pov_shoot.jpg)"></div>
+  <div class="exp-shade"></div>
+  <div class="flash" id="flash"></div>
+  <div class="rec-badge" id="recBadge"><i></i>REC <b id="recTime">00:00</b><span>/ 최대 12:00 · 2.5K</span></div>
+  <div class="exp-inner">
+    <div class="panel reveal">
+      <p class="eyebrow">촬영</p>
+      <h2 class="exp-title">폰을 꺼내는 사이,<br>놓치지 않게.</h2>
+      <p class="exp-desc">안경 앞 버튼을 누르는 것처럼 눌러 보세요. 한 번은 사진, 두 번은 영상. 찍은 건 Wi-Fi로 내 폰 갤러리에 바로 들어옵니다.</p>
+      <div class="btn-row">
+        <button class="cam-btn photo" id="btnPhoto" type="button"><span class="ring"><i></i></span><span class="lbl">사진</span></button>
+        <button class="cam-btn video" id="btnVideo" type="button"><span class="ring"><i></i></span><b class="lbl">영상</b></button>
+      </div>
+      <p class="led-note" id="ledNote"><span class="led"></span>촬영 중에는 안경 바깥 LED가 켜져 상대방도 알 수 있습니다.</p>
+    </div>
+    <div class="phone reveal" aria-label="에이도 앱 갤러리 화면">
+      <div class="phone-screen">
+        <div class="app-head"><b>에이도 앱</b><span>갤러리</span></div>
+        <div class="gallery" id="gallery"><p class="empty" id="galleryEmpty">버튼을 눌러 보세요.<br>찍은 사진이 여기로 옵니다.</p></div>
+        <div class="toast" id="toast">Wi-Fi로 폰에 저장됨</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 체험 2: 통역 ================= -->
+<section class="exp" id="exp-talk">
+  <div class="exp-bg talk-bg" id="talkBg" style="background-image:url(pov_market.jpg)"></div>
+  <div class="talk-scene" aria-live="polite">
+    <div class="tcap" id="tcap">
+      <p class="tc-tag" id="tcTag"></p>
+      <p class="tc-orig" id="tcOrig"></p>
+      <p class="tc-main" id="tcMain"></p>
+      <span class="tc-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+    </div>
+  </div>
+  <div class="exp-shade"></div>
+  <div class="exp-inner">
+    <div class="panel reveal">
+      <p class="eyebrow">통역</p>
+      <h2 class="exp-title">말하면, 상대 언어로.<br>들으면, 한국어로.</h2>
+      <p class="exp-desc">상대 언어를 고르고, 하고 싶은 말을 눌러 보세요. 소리가 나옵니다.</p>
+      <div class="chips-row" id="langRow" role="radiogroup" aria-label="상대 언어"></div>
+      <div class="phrase-row" id="phraseRow"></div>
+      <div class="talk-status" id="talkStatus" aria-live="polite"></div>
+      <label class="snd"><input type="checkbox" id="sndTalk" checked> 소리 켜기</label>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 체험 3: 골전도 통화 ================= -->
+<section class="exp" id="exp-voice">
+  <div class="exp-bg" style="background-image:url(pov_wind.jpg)"></div>
+  <div class="exp-shade"></div>
+  <div class="exp-inner">
+    <div class="panel reveal">
+      <p class="eyebrow">통화</p>
+      <h2 class="exp-title">바람 부는 다리 위에서도,<br>내 목소리만.</h2>
+      <p class="exp-desc">상대방에게 내 목소리가 어떻게 들리는지 비교해 보세요. 코받침의 골전도 마이크가 뼈 진동으로 목소리만 잡습니다.</p>
+      <div class="seg" role="radiogroup" aria-label="마이크 종류">
+        <button type="button" data-mode="air">일반 마이크</button>
+        <button type="button" data-mode="bone" class="on">골전도 마이크 (에이도)</button>
+      </div>
+      <button class="shutter wide" id="btnCall" type="button"><span class="play"></span>상대방이 듣는 소리 듣기</button>
+      <canvas class="wave" id="wave" width="900" height="160" aria-hidden="true"></canvas>
+      <p class="wave-legend"><span class="lg-noise"></span>주변 소음 <span class="lg-voice"></span>내 목소리</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 그리고, 더 있습니다 ================= -->
+<section class="sec more" id="more">
+  <div class="wrap">
+    <p class="eyebrow reveal">And more</p>
+    <h2 class="sec-title reveal">그리고, <em>더 있습니다.</em></h2>
+    <div class="tiles">
+      <article class="tile reveal"><h3>4K 영상</h3><p>유튜브·TV에 올려도 화질 타협이 없다.</p></article>
+      <article class="tile reveal"><h3>전자식 + 6축 손떨림 보정</h3><p>걸으며 찍어도 보는 사람이 어지럽지 않게.</p></article>
+      <article class="tile reveal"><h3>가로·세로 촬영 선택</h3><p>유튜브용 가로, 릴스용 세로를 원본 그대로.</p></article>
+      <article class="tile reveal"><h3>회의록 요약 + 마인드맵</h3><p>회의가 끝나면 정리도 끝나 있다.</p></article>
+      <article class="tile reveal"><h3>눈앞의 것을 묻는 AI</h3><p>"이 앞에 보이는 게 뭐야?"</p></article>
+      <article class="tile reveal"><h3>폰 안 꺼내고 녹음</h3><p>뒤 버튼을 길게 누르면 안경 단독으로.</p></article>
+      <article class="tile reveal"><h3>오픈형 스피커, 음악 10시간</h3><p>귀를 막지 않아 주변 소리가 들린다.</p></article>
+      <article class="tile reveal"><h3>대기 7일, USB-C</h3><p>폰 충전기 그대로.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 디자인: 49g (깃털) ================= -->
+<section class="sec design2" id="design">
+  <div class="design2-bg" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="eyebrow reveal">무게</p>
+    <h2 class="sec-title reveal">49g.<br>쓰고 있다는 걸 잊는다.</h2>
+    <p class="body reveal">군더더기 없는 매트 블랙. 금속 탄성 힌지와 TR 소재로 하루 종일 조이지 않습니다. 쓰면 켜지고, 벗으면 꺼집니다.</p>
+  </div>
+</section>
+
+<!-- ================= 체험 4: 렌즈 ================= -->
+<section class="exp lens-exp" id="exp-lens">
+  <div class="lens-stage" id="lensStage" data-type="blue">
+    <img class="ls-base" id="lsBase" src="lens_blue.jpg" alt="">
+    <img class="ls-tint" id="lsTint" src="lens_blue.jpg" alt="">
+    <div class="ls-rim" aria-hidden="true"></div>
+    <p class="ls-tag" id="lsTag">렌즈 안쪽 · 블루라이트 차단</p>
+  </div>
+  <div class="exp-inner">
+    <div class="panel reveal">
+      <p class="eyebrow">렌즈</p>
+      <h2 class="exp-title">상황 따라,<br>렌즈를 바꿔 끼운다.</h2>
+      <p class="exp-desc">렌즈 3종이 함께 들어 있습니다. 눌러서 바꿔 끼워 보세요.</p>
+      <div class="lens-tabs" role="tablist">
+        <button type="button" role="tab" class="on" data-type="blue">블루라이트 차단</button>
+        <button type="button" role="tab" data-type="sun">선글라스</button>
+        <button type="button" role="tab" data-type="photo">변색</button>
+      </div>
+      <p class="lens-desc" id="lensDesc">화면 앞에서 오래 일할 때. 모니터의 차가운 빛을 덜어 줍니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 알림 신청 ================= -->
+<section class="sec notify" id="notify">
+  <div class="notify-bg" aria-hidden="true"></div>
+  <div class="wrap center">
+    <h2 class="display en reveal">Miss <em>nothing.</em></h2>
+    <p class="sub reveal">출시 알림을 신청하면 첫 혜택을 가장 먼저 받습니다.</p>
+    <a class="btn js-cta reveal" href="#">출시 알림 신청</a>
+    <p class="note reveal">문의 <a class="js-mail" href="#"></a></p>
+  </div>
+</section>
+
+<!-- ================= 각주 · 푸터 ================= -->
+<footer class="foot">
+  <div class="wrap">
+    <details class="spec-mini" id="spec"><summary>전체 사양 보기</summary>
+<dl class="spec-list mini">
+      <div><dt>카메라</dt><dd>소니 2,000만 화소 센서. 4K · 3.2K · 2K 60fps · 2.5K · 1080p. 한 클립 최대 12분(2.5K). 전자식 + 6축 손떨림 보정. 가로·세로 촬영</dd></div>
+      <div><dt>음향</dt><dd>오픈형 스피커, 골전도 마이크 + 노이즈 캔슬링 공기 마이크, 블루투스 통화, 터치 음악 조작</dd></div>
+      <div><dt>AI</dt><dd>139개 언어 번역(대화 · 동시통역 · 회의록), 회의록 요약 · 마인드맵, 사물 인식, 음성 호출</dd></div>
+      <div><dt>전송</dt><dd>Wi-Fi로 폰에 직접 전송, 블루투스 상시 연결</dd></div>
+      <div><dt>배터리</dt><dd>음악 재생 약 10시간, 대기 7일 이상. USB-C 충전</dd></div>
+      <div><dt>방진·방수</dt><dd>IP66</dd></div>
+      <div><dt>착용</dt><dd>49g, 155 × 55mm, TR 소재, 금속 탄성 힌지, 무광 블랙, 착용 감지 센서, 물리 버튼 2개 + 터치</dd></div>
+      <div><dt>렌즈</dt><dd>탈착식 3종: 블루라이트 차단 · 선글라스 · 변색</dd></div>
+      <div><dt>보증</dt><dd>국내 1년 A/S</dd></div>
+      <div><dt>인증</dt><dd>KC 인증 진행 중</dd></div>
+    </dl>
+</details>
+    <ol class="notes">
+      <li>수치는 제조사 사양 기준(2026.10). 사용 환경에 따라 다를 수 있습니다.</li>
+      <li>촬영 모드별 해상도와 클립 길이는 앱 설정에 따릅니다.</li>
+      <li>번역·회의록·AI 기능은 전용 앱과 스마트폰 인터넷 연결이 필요합니다.</li>
+      <li>음악 재생·대기 시간은 제조사 사양 기준입니다.</li>
+      <li>이 페이지의 3D 모델과 장면 이미지는 이해를 돕기 위한 연출이며, 실제 제품·촬영본과 다를 수 있습니다. 체험 화면과 소리는 기능 설명용 예시입니다.</li>
+    </ol>
+    <div class="foot-info">
+      <img src="logo_white.svg" alt="EIDO" class="foot-logo">
+      <p>주식회사 태백 · 경기도 파주시 청석로 272, 1004-814호 (동패동, 센타프라자1)</p>
+      <p>에이도 · EIDO 상표출원 제40-2026-0218741호 · 제40-2026-0218744호</p>
+      <p>특허출원 제10-2026-0200556호 · 제10-2026-0200558호 (출원 상태)</p>
+      <p>KC 인증 진행 중 · 사양은 출시 시 일부 변경될 수 있습니다.</p>
+      <p>© 2026 Taebaek Inc. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+</main>
+
+<!-- 갤러리 보기 화면 (사진 보기 / 영상 재생) -->
+<div class="viewer" id="viewer" hidden role="dialog" aria-modal="true" aria-label="에이도 앱 갤러리 보기">
+  <div class="vw-box">
+    <div class="vw-head"><span>에이도 앱 · 갤러리</span><button type="button" class="vw-close" aria-label="닫기">닫기 ✕</button></div>
+    <div class="vw-media">
+      <div class="vw-photo" id="vwPhoto"></div>
+      <video class="vw-video" id="vwVideo" src="rec_clip.webm" muted playsinline preload="auto"></video>
+      <div class="vw-ctrl"><button type="button" class="vw-play" id="vwPlay" aria-label="재생"></button><span class="vw-bar" id="vwBar"><i id="vwProg"></i></span><span class="vw-time" id="vwTime">00:00 / 00:00</span></div>
+    </div>
+    <p class="vw-meta" id="vwMeta"></p>
+  </div>
+</div>
+
+<script src="config.js?v=3"></script>
+<script src="main.js?v=11"></script>
+<script type="module" src="intro3d_v4.js?v=13"></script>
+</body>
+</html>
