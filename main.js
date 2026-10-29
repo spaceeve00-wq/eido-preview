@@ -116,7 +116,7 @@
     const bx = 25 + Math.random() * 50, by = 25 + Math.random() * 40;
     const th = document.createElement('div');
     th.className = 'thumb' + (isVideo ? ' vid' : '');
-    th.style.backgroundImage = 'url(pov_shoot.jpg)';
+    th.style.backgroundImage = 'url(shoot_kids.jpg)';
     th.style.backgroundPosition = `${bx}% ${by}%`;
     th.dataset.kind = isVideo ? 'video' : 'photo'; th.dataset.bx = bx; th.dataset.by = by;
     th.setAttribute('role', 'button'); th.tabIndex = 0; th.title = isVideo ? '영상 재생' : '사진 보기';
@@ -126,7 +126,7 @@
     const sec = $('#exp-shoot').getBoundingClientRect();
     const fly = document.createElement('div');
     fly.className = 'fly';
-    fly.style.backgroundImage = isVideo ? 'url(rec_kids_poster.jpg)' : 'url(pov_shoot.jpg)';
+    fly.style.backgroundImage = isVideo ? 'url(rec_kids_poster.jpg)' : 'url(shoot_kids.jpg)';
     fly.style.backgroundPosition = `${bx}% ${by}%`;
     fly.style.backgroundSize = isVideo ? 'cover' : '170%';
     const w = Math.min(420, innerWidth * .5), h = w * 0.6;
