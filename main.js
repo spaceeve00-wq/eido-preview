@@ -182,7 +182,7 @@
   const PHRASES = [
     { ko:'이거 얼마예요?',
       t:{ ja:'これはいくらですか？', zh:'这个多少钱？', vi:'Cái này bao nhiêu tiền?', en:'How much is this?' },
-      r:{ ja:['一本三百円です。','한 개에 300엔이에요.'], zh:['一串十块钱。','한 꼬치에 10위안이에요.'], vi:['Ba mươi nghìn một xiên.','한 꼬치에 3만 동이에요.'], en:["It's five dollars each.",'하나에 5달러예요.'] } },
+      r:{ ja:['一本三百円です。','한 꼬치에 300엔이에요.'], zh:['一串十块钱。','한 꼬치에 10위안이에요.'], vi:['Ba mươi nghìn một xiên.','한 꼬치에 3만 동이에요.'], en:["It's five dollars each.",'하나에 5달러예요.'] } },
     { ko:'덜 맵게 해 주세요.',
       t:{ ja:'辛さを控えめにしてください。', zh:'请少放点辣。', vi:'Làm ít cay giúp tôi nhé.', en:'Less spicy, please.' },
       r:{ ja:['はい、控えめにしますね。','네, 덜 맵게 해 드릴게요.'], zh:['好的，少放辣。','네, 덜 맵게 할게요.'], vi:['Vâng, tôi sẽ làm ít cay.','네, 덜 맵게 해 드릴게요.'], en:["Sure, I'll make it mild.",'네, 순하게 해 드릴게요.'] } },
@@ -287,11 +287,11 @@
     cap('me', `에이도 → 상대에게 · ${L.name}`, ph.ko, out);
     on ? await speak(out, L.tts, { rate: .95 }) : await sleep(1500);
     capQuiet();
-    status.innerHTML = `${eq} 상대가 대답합니다`;
+    status.innerHTML = `${eq} 상대가 대답하는 중`;
     await sleep(450);
     cap('them', `상대 · ${L.name}`, '', rep);
     on ? await speak(rep, L.tts, { rate: 1.0, volume: .9, pitch: .88 }) : await sleep(1500);
-    status.innerHTML = `${eq} 내 귀에 한국어로`;
+    status.innerHTML = `${eq} 내 귀에 한국어로 통역하는 중`;
     cap('them', '내 귀에 · 한국어', rep, repKo);
     on ? await speak(repKo, 'ko-KR', { rate: 1.05 }) : await sleep(1500);
     capQuiet();
@@ -362,9 +362,9 @@
   const base = document.getElementById('lsBase'), tint = document.getElementById('lsTint');
   const tag = document.getElementById('lsTag'), desc = document.getElementById('lensDesc');
   const L = {
-    blue:  { img:'lens_blue.jpg',  tag:'렌즈 안쪽 · 블루라이트 차단', desc:'화면 앞에서 오래 일할 때. 모니터의 차가운 빛을 덜어 줍니다.' },
-    sun:   { img:'lens_sun.jpg',   tag:'렌즈 안쪽 · 선글라스',       desc:'햇빛 강한 야외에서. 눈부심을 줄여 줍니다.' },
-    photo: { img:'lens_photo.jpg', tag:'렌즈 안쪽 · 변색 (실내 → 실외)', desc:'실내에선 밝게, 햇빛 아래에선 스스로 어두워집니다. 하나로 안팎을 오갈 때.' },
+    blue:  { img:'lens_blue.jpg',  tag:'렌즈 너머로 · 블루라이트 차단', desc:'화면 앞에서 오래 일할 때. 모니터의 차가운 빛을 덜어 줍니다.' },
+    sun:   { img:'lens_sun.jpg',   tag:'렌즈 너머로 · 선글라스',       desc:'햇빛 강한 야외에서. 눈부심을 줄여 줍니다.' },
+    photo: { img:'lens_photo.jpg', tag:'렌즈 너머로 · 변색 (실내 → 실외)', desc:'실내와 실외를 자주 오갈 때. 실내에선 맑게, 햇빛 아래에선 저절로 어두워집니다.' },
   };
   [L.sun.img, L.photo.img].forEach(src => { const i = new Image(); i.src = src; });
   document.querySelectorAll('.lens-tabs button').forEach(b => b.addEventListener('click', () => {
