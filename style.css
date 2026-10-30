@@ -661,3 +661,9 @@ input[type=checkbox]{accent-color:#f5f5f3}
 .design2-bg{background-image:url(egg.jpg);background-position:72% 50%;animation:egg-in 1.6s ease-out both}
 @keyframes egg-in{from{transform:scale(1.04);opacity:.6}to{transform:none;opacity:1}}
 @media (max-width:820px){.design2-bg{background-position:85% 30%;background-size:220% auto}}
+/* AI 출처 표기 (2026-10-30, 대표 확정): 일반 글자만, 로고·MS 색상 없음 */
+.ai-brain{margin-top:80px;padding-top:44px;border-top:1px solid rgba(255,255,255,.12)}
+.ai-brain-title{font-family:var(--sans);font-weight:700;font-size:clamp(28px,3.6vw,48px);letter-spacing:-.04em;line-height:1.2;color:#f4f4f2;margin:10px 0 14px}
+.ai-brain-sub{font-size:clamp(16px,1.5vw,20px);color:rgba(244,244,242,.72);margin-bottom:22px}
+.ai-brain-note{font-size:12px;color:rgba(244,244,242,.42)}
+.design2-ai{margin-top:18px;font-size:clamp(15px,1.3vw,18px);color:rgba(244,244,242,.8);font-weight:600}
