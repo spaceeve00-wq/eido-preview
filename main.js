@@ -27,9 +27,11 @@
   const C = window.EIDO_CONFIG || {};
   const mail = C.CONTACT_EMAIL || '';
   document.querySelectorAll('.js-mail').forEach(a => { a.textContent = mail; a.href = 'mailto:' + mail; });
+  // v23: 알림 버튼은 메일 앱 대신 와디즈 주소(config.js) 또는 마지막 알림 섹션으로
   document.querySelectorAll('.js-cta').forEach(a => {
     if (C.WADIZ_URL) { a.href = C.WADIZ_URL; a.target = '_blank'; a.rel = 'noopener'; }
-    else if (a.closest('#notify')) { a.href = 'mailto:' + mail + '?subject=' + encodeURIComponent('에이도 출시 알림 신청'); }
+    else if (a.closest('#notify')) { a.hidden = true; } // 주소가 나오기 전엔 알림 섹션 안 버튼은 숨김(자기 자신으로 가는 버튼이라)
+    else { a.href = '#notify'; }
   });
 
   /* ---------- 소리 도우미 ---------- */

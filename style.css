@@ -696,3 +696,16 @@ input[type=checkbox]{accent-color:#f5f5f3}
   .safe-item,.safe-item+.safe-item{padding:24px 0;border-left:0}
   .safe-item+.safe-item{border-top:1px solid rgba(255,255,255,.1)}
 }
+
+/* v23: 상단 메뉴 "구입" + 긴 알림 버튼 */
+.nav-links a.is-buy{color:var(--ink)}
+.nav-cta{white-space:nowrap}
+@media (max-width:820px){
+  .nav-links{display:flex;gap:0}
+  .nav-links a:not(.is-buy){display:none}
+  .nav-links a.is-buy{padding:0 12px;font-size:13px}
+  .nav-cta{font-size:12px;padding:8px 12px}
+}
+.nav-logo{flex-shrink:0}
+.nav-logo img{min-width:52px}
+.js-cta[hidden]{display:none !important}
