@@ -116,17 +116,17 @@
     const bx = 25 + Math.random() * 50, by = 25 + Math.random() * 40;
     const th = document.createElement('div');
     th.className = 'thumb' + (isVideo ? ' vid' : '');
-    th.style.backgroundImage = 'url(shoot_kids.jpg)';
+    th.style.backgroundImage = 'url(shoot_kids.webp)';
     th.style.backgroundPosition = `${bx}% ${by}%`;
     th.dataset.kind = isVideo ? 'video' : 'photo'; th.dataset.bx = bx; th.dataset.by = by;
     th.setAttribute('role', 'button'); th.tabIndex = 0; th.title = isVideo ? '영상 재생' : '사진 보기';
     th.style.backgroundSize = '170%';
-    if (isVideo) { th.dataset.dur = dur; th.style.backgroundImage = 'url(rec_kids_poster.jpg)'; th.style.backgroundSize = 'cover'; th.style.backgroundPosition = '50% 40%'; }
+    if (isVideo) { th.dataset.dur = dur; th.style.backgroundImage = 'url(rec_kids_poster.webp)'; th.style.backgroundSize = 'cover'; th.style.backgroundPosition = '50% 40%'; }
     // 화면 가운데에서 폰 갤러리로 날아가는 효과
     const sec = $('#exp-shoot').getBoundingClientRect();
     const fly = document.createElement('div');
     fly.className = 'fly';
-    fly.style.backgroundImage = isVideo ? 'url(rec_kids_poster.jpg)' : 'url(shoot_kids.jpg)';
+    fly.style.backgroundImage = isVideo ? 'url(rec_kids_poster.webp)' : 'url(shoot_kids.webp)';
     fly.style.backgroundPosition = `${bx}% ${by}%`;
     fly.style.backgroundSize = isVideo ? 'cover' : '170%';
     const w = Math.min(420, innerWidth * .5), h = w * 0.6;
@@ -362,9 +362,9 @@
   const base = document.getElementById('lsBase'), tint = document.getElementById('lsTint');
   const tag = document.getElementById('lsTag'), desc = document.getElementById('lensDesc');
   const L = {
-    blue:  { img:'lens_blue.jpg',  tag:'렌즈 너머로 · 블루라이트 차단', desc:'화면 앞에서 오래 일할 때. 모니터의 차가운 빛을 덜어 줍니다.' },
-    sun:   { img:'lens_sun.jpg',   tag:'렌즈 너머로 · 선글라스',       desc:'햇빛 강한 야외에서. 눈부심을 줄여 줍니다.' },
-    photo: { img:'lens_photo.jpg', tag:'렌즈 너머로 · 변색 (실내 → 실외)', desc:'실내와 실외를 자주 오갈 때. 실내에선 맑게, 햇빛 아래에선 저절로 어두워집니다.' },
+    blue:  { img:'lens_blue.webp',  tag:'렌즈 너머로 · 블루라이트 차단', desc:'화면 앞에서 오래 일할 때. 모니터의 차가운 빛을 덜어 줍니다.' },
+    sun:   { img:'lens_sun.webp',   tag:'렌즈 너머로 · 선글라스',       desc:'햇빛 강한 야외에서. 눈부심을 줄여 줍니다.' },
+    photo: { img:'lens_photo.webp', tag:'렌즈 너머로 · 변색 (실내 → 실외)', desc:'실내와 실외를 자주 오갈 때. 실내에선 맑게, 햇빛 아래에선 저절로 어두워집니다.' },
   };
   [L.sun.img, L.photo.img].forEach(src => { const i = new Image(); i.src = src; });
   document.querySelectorAll('.lens-tabs button').forEach(b => b.addEventListener('click', () => {
@@ -405,6 +405,12 @@
   }
   const RATE = 1.8; // v14: 아이들 뛰는 실사 영상(Pexels 6299073)이 슬로모션이라 실제 속도에 가깝게
   vid.defaultPlaybackRate = RATE;
+  // v22: 영상은 촬영 체험 근처에 왔을 때만 불러오기 (첫 로딩 용량 줄이기)
+  const shootSec = document.getElementById('exp-shoot');
+  if (shootSec && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { vid.preload = 'auto'; try { vid.load(); } catch(e){} io.disconnect(); } }, { rootMargin: '400px 0px' });
+    io.observe(shootSec);
+  }
   function play(){ if (elapsed >= total) { elapsed = 0; vid.currentTime = 0; } vid.playbackRate = RATE; playing = true; last = performance.now(); vid.play().catch(()=>{}); pp.classList.add('on'); pp.setAttribute('aria-label', '일시정지'); raf = requestAnimationFrame(tick); }
   function stop(end){ playing = false; vid.pause(); pp.classList.remove('on'); pp.setAttribute('aria-label', '재생'); cancelAnimationFrame(raf); if (end) vw.classList.add('ended'); }
   vid.addEventListener('ended', () => { if (playing && elapsed < total) { vid.currentTime = 0; vid.play().catch(()=>{}); } }); // 10초 넘는 영상은 이어서 반복

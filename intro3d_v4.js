@@ -1,7 +1,7 @@
 /* ===== 에이도 3D 인트로 v4 (2026-10-29): "에이도 해부도" =====
    참고: OCTABOOT(The Anatomy of a Suit) 릴스 — 어둠 속 선 → 부품이 한 겹씩 채워짐 → 완성 → 착용.
    흐름: 흰 선으로 그린 안경 → 프레임 → 카메라 → 렌즈 → 코받침(골전도) → 다리(투시: 속 부품) → 완성 49g
-         → 좌→우 회전해 뒷면이 나를 향함 → 한쪽 렌즈 뒤(눈 위치)로 들어가 착용 → 1인칭 장면(pov_shoot.jpg).
+         → 좌→우 회전해 뒷면이 나를 향함 → 한쪽 렌즈 뒤(눈 위치)로 들어가 착용 → 1인칭 장면(pov_shoot.webp).
    모델은 실물 사진을 보고 만든 단순화 3D(mm 단위). 제조사 3D 파일을 받으면 교체 가능. */
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
@@ -190,13 +190,13 @@ Object.values(parts).forEach(P => P.mats.forEach(centerFade));
 scene.add(new THREE.HemisphereLight(0x9fc6dc, 0x0a0a0a, 0.3));
 const key = new THREE.DirectionalLight(0xffffff, 1.5); key.position.set(160, 220, 320); scene.add(key);
 const top = new THREE.DirectionalLight(0xffffff, 0.6); top.position.set(0, 400, 60); scene.add(top);
-const rimL = new THREE.DirectionalLight(BLUE, 5.5); rimL.position.set(-320, 140, -260); scene.add(rimL);
-const rimR = new THREE.DirectionalLight(ROSE, 4.5); rimR.position.set(320, 80, -220); scene.add(rimR);
+const rimL = new THREE.DirectionalLight(BLUE, 3.2); rimL.position.set(-320, 140, -260); scene.add(rimL);
+const rimR = new THREE.DirectionalLight(0xd9dde2, 1.4); // v22: 로즈 조명 → 중립 흰빛 (다리가 자홍색으로 보이던 문제, 실제 무광 블랙) rimR.position.set(320, 80, -220); scene.add(rimR);
 
 /* ---------- 렌즈 너머 세상 ---------- */
 const PLANE_Z = -900;
 let povAspect = 16 / 9;
-const povTex = new THREE.TextureLoader().load('pov_shoot.jpg', t => { t.colorSpace = THREE.SRGBColorSpace; povAspect = t.image.width / t.image.height; layout(); });
+const povTex = new THREE.TextureLoader().load('pov_shoot.webp', t => { t.colorSpace = THREE.SRGBColorSpace; povAspect = t.image.width / t.image.height; layout(); });
 const pov = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: povTex, transparent: true, opacity: 0, depthWrite: false, toneMapped: false }));
 pov.position.z = PLANE_Z; pov.renderOrder = -1; scene.add(pov);
 

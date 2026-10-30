@@ -12,8 +12,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
-<link rel="preload" as="image" href="shoot_kids.jpg">
-<link rel="stylesheet" href="style.css?v=25">
+<link rel="preload" as="image" href="shoot_kids.webp">
+<link rel="stylesheet" href="style.css?v=26">
 </head>
 <body>
 
@@ -103,7 +103,7 @@
 
 <!-- ================= 체험 1: 촬영 ================= -->
 <section class="exp" id="exp-shoot">
-  <div class="exp-bg" style="background-image:url(shoot_kids.jpg)"></div>
+  <div class="exp-bg" style="background-image:url(shoot_kids.webp)"></div>
   <div class="exp-shade"></div>
   <div class="flash" id="flash"></div>
   <div class="rec-badge" id="recBadge"><i></i>REC <b id="recTime">00:00</b><span>/ 최대 12:00 · 2.5K</span></div>
@@ -130,7 +130,7 @@
 
 <!-- ================= 체험 2: 통역 ================= -->
 <section class="exp" id="exp-talk">
-  <div class="exp-bg talk-bg" id="talkBg" style="background-image:url(pov_market.jpg)"></div>
+  <div class="exp-bg talk-bg" id="talkBg" style="background-image:url(pov_market.webp)"></div>
   <div class="talk-scene" aria-live="polite">
     <div class="tcap" id="tcap">
       <p class="tc-tag" id="tcTag"></p>
@@ -155,7 +155,7 @@
 
 <!-- ================= 체험 3: 골전도 통화 ================= -->
 <section class="exp" id="exp-voice">
-  <div class="exp-bg" style="background-image:url(pov_wind.jpg)"></div>
+  <div class="exp-bg" style="background-image:url(pov_wind.webp)"></div>
   <div class="exp-shade"></div>
   <div class="exp-inner">
     <div class="panel reveal">
@@ -189,9 +189,13 @@
       <article class="tile reveal"><h3>대기 7일, USB-C</h3><p>쓰던 폰 충전기로 그대로.</p></article>
     </div>
     <div class="ai-brain reveal">
-      <p class="eyebrow">AI</p>
-      <h3 class="ai-brain-title">에이도의 두뇌는 Microsoft AI.</h3>
-      <p class="ai-brain-note">AI 기능은 Microsoft의 AI 서비스로 처리되며, 처리 업체는 앱 업데이트에 따라 바뀔 수 있습니다.</p>
+      <div class="ai-brain-text">
+        <p class="eyebrow">AI</p>
+        <h3 class="ai-brain-title">에이도의 두뇌는 Microsoft AI.</h3>
+        <p class="ai-brain-ask">“이거 뭐야?” 눈앞의 걸 보고 물으면, 답은 귀로 들려줍니다.</p>
+        <p class="ai-brain-note">AI 기능은 Microsoft의 AI 서비스로 처리되며, 처리 업체는 앱 업데이트에 따라 바뀔 수 있습니다.</p>
+      </div>
+      <figure class="ai-brain-shot"><img src="ask_pov.webp" alt="시장에서 낯선 과일을 손에 들고 보는 1인칭 장면" loading="lazy" decoding="async" width="1400" height="1050"></figure>
     </div>
   </div>
 </section>
@@ -207,10 +211,24 @@
 </section>
 
 <!-- ================= 체험 4: 렌즈 ================= -->
+<!-- ================= 안심 ================= -->
+<section class="sec safe" id="safe">
+  <div class="wrap">
+    <p class="eyebrow reveal">안심</p>
+    <h2 class="sec-title reveal">찍은 건, 내 폰에.</h2>
+    <div class="safe-grid">
+      <article class="safe-item reveal"><h3>사진·영상은 내 폰으로</h3><p>찍은 사진과 영상은 안경에서 Wi-Fi로 내 폰에 바로 옮겨 저장됩니다. 중간 서버를 거치지 않습니다.</p></article>
+      <article class="safe-item reveal"><h3>AI 대화는 학습에 쓰지 않습니다</h3><p>AI에게 묻고 답한 내용은 AI 학습에 쓰이지 않습니다.</p></article>
+      <article class="safe-item reveal"><h3>찍는 중엔 LED가 켜집니다</h3><p>촬영하는 동안 바깥쪽 LED가 켜져 상대방도 알 수 있습니다.</p></article>
+    </div>
+    <p class="safe-note reveal">AI 기능 이용 시 질문·음성은 처리를 위해 해외 클라우드로 전송되며, 처리 방식은 전용 앱 개인정보처리방침을 따릅니다.</p>
+  </div>
+</section>
+
 <section class="exp lens-exp" id="exp-lens">
   <div class="lens-stage" id="lensStage" data-type="blue">
-    <img class="ls-base" id="lsBase" src="lens_blue.jpg" alt="">
-    <img class="ls-tint" id="lsTint" src="lens_blue.jpg" alt="">
+    <img class="ls-base" id="lsBase" src="lens_blue.webp" alt="">
+    <img class="ls-tint" id="lsTint" src="lens_blue.webp" alt="">
     <div class="ls-rim" aria-hidden="true"></div>
     <p class="ls-tag" id="lsTag">렌즈 너머로 · 블루라이트 차단</p>
   </div>
@@ -225,6 +243,21 @@
         <button type="button" role="tab" data-type="photo">변색</button>
       </div>
       <p class="lens-desc" id="lensDesc">화면 앞에서 오래 일할 때. 모니터의 차가운 빛을 덜어 줍니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 자주 묻는 질문 ================= -->
+<section class="sec faq" id="faq">
+  <div class="wrap">
+    <p class="eyebrow reveal">FAQ</p>
+    <h2 class="sec-title reveal">자주 묻는 질문</h2>
+    <div class="faq-list reveal">
+      <details><summary>아이폰·갤럭시 둘 다 되나요?</summary><p>네. 전용 앱이 iOS와 Android 모두 있습니다.</p></details>
+      <details><summary>폰이나 인터넷 없이도 쓸 수 있나요?</summary><p>촬영과 녹음은 안경 버튼만으로 됩니다. 사진·영상을 폰으로 옮기거나 AI·통역을 쓰려면 전용 앱이 필요하고, AI·통역은 인터넷 연결이 필요합니다.</p></details>
+      <details><summary>비 오는 날 써도 되나요?</summary><p>IP66이라 비, 땀, 물 튀김은 괜찮습니다. 물에 담그기, 샤워·수영, 초음파 세척은 안 됩니다. 세척은 렌즈만 빼서 물로, 프레임은 젖은 천으로 닦아 주세요.</p></details>
+      <details><summary>렌즈는 어떻게 고르나요?</summary><p>블루라이트 차단, 선글라스, 변색 3종 중에서 고를 수 있습니다.</p></details>
+      <details><summary>무상 보증 기간은요?</summary><p>구입 후 1년입니다.</p></details>
     </div>
   </div>
 </section>
@@ -283,7 +316,7 @@
     <div class="vw-head"><span>에이도 앱 · 갤러리</span><button type="button" class="vw-close" aria-label="닫기">닫기 ✕</button></div>
     <div class="vw-media">
       <div class="vw-photo" id="vwPhoto"></div>
-      <video class="vw-video" id="vwVideo" src="rec_kids.mp4" poster="rec_kids_poster.jpg" muted playsinline preload="auto"></video>
+      <video class="vw-video" id="vwVideo" src="rec_kids.mp4" poster="rec_kids_poster.webp" muted playsinline preload="none"></video>
       <div class="vw-ctrl"><button type="button" class="vw-play" id="vwPlay" aria-label="재생"></button><span class="vw-bar" id="vwBar"><i id="vwProg"></i></span><span class="vw-time" id="vwTime">00:00 / 00:00</span></div>
     </div>
     <p class="vw-meta" id="vwMeta"></p>
@@ -291,7 +324,7 @@
 </div>
 
 <script src="config.js?v=3"></script>
-<script src="main.js?v=15"></script>
-<script type="module" src="intro3d_v4.js?v=13"></script>
+<script src="main.js?v=16"></script>
+<script type="module" src="intro3d_v4.js?v=14"></script>
 </body>
 </html>
