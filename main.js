@@ -92,6 +92,17 @@
     const ok = same.filter(v => !BAD.test(v.name));
     return ok.find(v => norm(v) === lang.toLowerCase()) || ok[0] || same[0] || null;
   }
+  // 모바일 음성 (v27, 2026-11-01): 안드로이드 크롬은 u.voice를 지정하면 소리가 안 나는 버그가 있어 언어만 지정.
+  // 아이폰은 첫 음성 읽기를 버튼 누른 순간에 시작해야 해서, 클릭 직후 무음 한 마디로 잠금을 푼다.
+  const IS_ANDROID = /Android/i.test(navigator.userAgent);
+  function unlockSpeech(){
+    try {
+      if (!window.speechSynthesis) return;
+      speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(" "); u.volume = 0; u.lang = "ko-KR";
+      speechSynthesis.speak(u);
+    } catch(e){}
+  }
   function speak(text, lang, { volume = 1, rate = 1, pitch = 1 } = {}){
     return new Promise(res => {
       const fallback = 900 + text.length * 85;
@@ -99,10 +110,11 @@
       const u = new SpeechSynthesisUtterance(text);
       u.lang = lang; u.volume = volume; u.rate = rate; u.pitch = pitch;
       const v = pickVoice(lang);
-      if (v) u.voice = v;
+      if (v && !IS_ANDROID) u.voice = v;
       let done = false; const fin = () => { if (!done) { done = true; res(); } };
       u.onend = fin; u.onerror = fin;
       setTimeout(fin, fallback + 4000);
+      try { speechSynthesis.resume(); } catch(e){}
       speechSynthesis.speak(u);
     });
   }
@@ -280,6 +292,7 @@
     if (busy) return; busy = true;
     [...phraseRow.children].forEach(b => b.disabled = true);
     const L = LANGS[lang], on = snd.checked;
+    if (on) { unlockSpeech(); try { audio().resume(); } catch(e){} }
     const out = ph.t[lang], [rep, repKo] = ph.r[lang];
     if (on) { ambience(true); ambDuck(true); }
     status.innerHTML = `${eq} 내 말: "${ph.ko}"`;
@@ -333,6 +346,7 @@
   drawWave();
   $('#btnCall').addEventListener('click', async () => {
     if (playing) return; playing = true;
+    unlockSpeech();
     let src, g;
     try {
       const ctx = audio(); await ctx.resume();
