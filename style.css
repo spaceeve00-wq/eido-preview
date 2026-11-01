@@ -776,3 +776,16 @@ input[type=checkbox]{accent-color:#f5f5f3}
   /* 떠 있는 메뉴 뒤로 글자가 비쳐 지저분하던 것: 화면 맨 위를 살짝 어둡게 */
   body::before{content:"";position:fixed;left:0;right:0;top:0;height:72px;background:linear-gradient(rgba(10,10,10,.92) 40%,rgba(10,10,10,0));z-index:49;pointer-events:none}
 }
+/* v30 (2026-11-01, 대표 확정 히어로): 1줄 제목 + 2줄 비교 문장 + 숫자줄 3개 */
+.intro .tech-title.hero-v3{font-size:clamp(34px,4.4vw,66px);line-height:1.15;letter-spacing:-.045em}
+.intro .tech-title.hero-v3::before{display:none}
+.intro .tech-title.hero-v3 .m-br{display:none}
+.intro .hero-line2{margin:16px auto 0;font-size:clamp(18px,1.9vw,28px);font-weight:600;letter-spacing:-.03em;color:#f5f5f3}
+.hero-ast2{font-size:.55em;font-weight:500;color:rgba(245,245,243,.7);margin-left:2px;font-family:var(--mono)}
+@media (max-width:820px){
+  .intro .tech-title.hero-v3{font-size:clamp(26px,7.6vw,34px)}
+  .intro .tech-title.hero-v3 .m-br{display:inline}
+  .intro .hero-line2{font-size:17px;margin-top:12px}
+}
+.intro .tech-title.hero-v3 .tt-text{display:inline;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+@media (max-width:820px){.intro .ib-hero .tech-spec{justify-content:center;margin-left:auto;margin-right:auto}}
