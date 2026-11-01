@@ -793,3 +793,20 @@ input[type=checkbox]{accent-color:#f5f5f3}
     linear-gradient(180deg,#ffffff 0%,#e3f1f7 40%,#7fc0da 74%,#007BA7 100%) 0 0/100% 1.15em repeat;
   -webkit-background-clip:text;background-clip:text;color:transparent}
 @media (max-width:820px){.intro .ib-hero .tech-spec{justify-content:center;margin-left:auto;margin-right:auto}}
+/* v31 어디서 만들었나 (2026-11-01, 대표 확정) — 원산지 표기는 본문 크기로 숨기지 않음 */
+.origin{background:#0a0a0a;border-top:1px solid rgba(255,255,255,.08)}
+.origin-sub{margin-top:-36px;font-size:clamp(18px,1.7vw,24px);font-weight:600;color:#f5f5f3;letter-spacing:-.02em}
+.origin-made{margin-top:22px;font-size:17px;font-weight:600;color:#f5f5f3}
+.origin-made span{margin-left:10px;font-weight:500;color:rgba(245,245,243,.8)}
+.origin-grid{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;max-width:820px;border-top:1px solid rgba(255,255,255,.14)}
+.origin-grid>div{padding:26px 24px 8px 0}
+.origin-grid>div+div{padding-left:24px;border-left:1px solid rgba(255,255,255,.1)}
+.origin-grid h3{font-size:14px;font-weight:500;color:rgba(244,244,242,.55);margin-bottom:8px}
+.origin-grid p{font-size:17px;line-height:1.6;color:#f5f5f3}
+@media (max-width:820px){
+  .origin-sub{margin-top:-24px;font-size:18px}
+  .origin-made{font-size:16px}.origin-made span{display:block;margin:4px 0 0}
+  .origin-grid{grid-template-columns:1fr}
+  .origin-grid>div,.origin-grid>div+div{padding:20px 0 4px;border-left:0}
+  .origin-grid>div+div{border-top:1px solid rgba(255,255,255,.1)}
+}
